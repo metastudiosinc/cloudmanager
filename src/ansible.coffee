@@ -17,5 +17,8 @@
 spawn = require('child_process').spawn
 
 module.exports = (robot) ->
-  robot.hear /(.*)cloud status(.*)/i, (res)->
-    res.send "I am not that smart just yet...but soon."
+  robot.respond /ping all/i, (res) ->
+    #build = spawn '/bin/bash', ['test.sh']
+    build = spawn 'ansible', ['all','-m','ping']
+    build.stdout.on 'data', (data) -> res.send data.toString()
+    build.stderr.on 'data', (data) -> res.send data.toString()

@@ -16,6 +16,13 @@
 
 spawn = require('child_process').spawn
 
+getRandomName = ()->
+  "action-jack"
+
 module.exports = (robot) ->
-  robot.hear /(.*)cloud status(.*)/i, (res)->
-    res.send "I am not that smart just yet...but soon."
+# digital ocean start a small server
+  robot.hear /(.*)small server(.*)/i, (res)->
+    res.send "I will see what is lying around."
+    build = spawn 'tugboat', ["create", getRandomName()]
+    build.stdout.on 'data', (data) -> res.send data.toString()
+    build.stderr.on 'data', (data) -> res.send data.toString()
