@@ -5,8 +5,7 @@
 #   LIST_OF_ENV_VARS_TO_SET
 #
 # Commands:
-#   hubot hello - <what the respond trigger does>
-#   orly - <what the hear trigger does>
+#   wake up - wakes up heroku servers that are sleeping
 #
 # Notes:
 #   <optional notes required for the script>
