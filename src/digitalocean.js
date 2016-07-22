@@ -45,14 +45,14 @@ module.exports = function(robot){
   robot.hear(/(.*)DO small server(.*)/i, function(msg) {
     msg.send("I will see what is lying around.")
     createDOServer(function(data) {
-      msg.send(data)
+      msg.send(data.toString())
     });
 
   })
 
   robot.hear(/(.*)DO status(.*)/i, function(msg) {
     getDOdroplets(function(data) {
-      msg.send(data)
+      msg.send(data.toString())
     });
 
   })
