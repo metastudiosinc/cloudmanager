@@ -17,12 +17,12 @@
 spawn = require('child_process').spawn
 
 var getRandomName = function(){
-  return "action-jack"
+  return ("action-jack");
 }
 
 var createDOServer = function(callback){
 
-  build = spawn('doctl', ["compute", "droplet", "create", getRandomName()]
+  build = spawn('doctl', ["compute", "droplet", "create", getRandomName()])
   build.stdout.on('data', callback(data))
   build.stderr.on('data', callback(data))
 
