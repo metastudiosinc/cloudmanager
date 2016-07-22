@@ -22,7 +22,7 @@ var sshkey = "";
 build = spawn('doctl', ["compute", "ssh-key", "get", "1846811"])
 build.stdout.on('data', function(data) {
   console.log(data.toString());
-  sshkey = data[0]["fingerprint"];
+  sshkey = data[0]["fingerprint"].toString();
 });
 build.stderr.on('data', function(data) {
   console.log(data);
