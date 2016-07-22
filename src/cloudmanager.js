@@ -52,9 +52,11 @@ module.exports = function(robot) {
         for (var i = 0; i < apps.length; i++) {
 
           getAppStatus(apps[i], function(data) {
-            msg.send("-----");
-            msg.send(data.toString());
-            mmsg.send("-----");
+            var post = data.toString()
+            if (post.indexOf(apps[i]) > -1 || post.indexOf("web") > -1){
+              msg.send(post);
+            }
+
 
           })
         }
