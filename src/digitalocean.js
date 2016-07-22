@@ -24,7 +24,7 @@ build.stdout.on('data', function(data) {
   console.log(data);
   sshkey = data[0]["fingerprint"];
 });
-build.sterr.on('data', function(data) {
+build.stderr.on('data', function(data) {
   console.log(data);
 });
 
