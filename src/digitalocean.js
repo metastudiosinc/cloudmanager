@@ -16,13 +16,28 @@
 
 spawn = require('child_process').spawn
 
+var sshkey = "";
+
+//TODO ID Should be passed in somewhere
+build = spawn('doctl', ["compute", "ssh-key", "get", "1846811"])
+build.stdout.on('data', function(data) {
+  console.log(data);
+  sshkey = data[0]["fingerprint"];
+});
+build.sterr.on('data', function(data) {
+  console.log(data);
+});
+
+
 var getRandomName = function(){
   return ("action-jack");
 }
 
-var createDOServer = function(callback){
+var get
 
-  build = spawn('doctl', ["compute", "droplet", "create", getRandomName()])
+var createDOServer = function(size, image, callback){
+
+  build = spawn('doctl', ["compute", "droplet", "create", getRandomName()] ,"--size", size, "--image", image, "--region", "nyc1", "--ssh-keys", sshkey)
   build.stdout.on('data', function(data) {
     console.log(data);
     callback(data)
