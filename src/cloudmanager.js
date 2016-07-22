@@ -23,7 +23,8 @@ module.exports = function(robot) {
         data = data.toString();
         data = data.split("\n");
         for (chunk of data) {
-          if(chunk.indexOf("===") < 0){
+          if(chunk.indexOf("===") < 0 && chunk.length > 0){
+            msg.send(chunk);
             build2 = spawn('heroku', ["ps", "--app", chunk])
             build2.stdout.on('data', function (data2) {
               msg.send(data2);
