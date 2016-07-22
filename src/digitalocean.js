@@ -21,7 +21,7 @@ var sshkey = "";
 //TODO ID Should be passed in somewhere
 build = spawn('doctl', ["compute", "ssh-key", "get", "1846811"])
 build.stdout.on('data', function(data) {
-  console.log(data);
+  console.log(data.toString());
   sshkey = data[0]["fingerprint"];
 });
 build.stderr.on('data', function(data) {
@@ -37,7 +37,7 @@ var get
 
 var createDOServer = function(size, image, callback){
 
-  build = spawn('doctl', ["compute", "droplet", "create", getRandomName()] ,"--size", size, "--image", image, "--region", "nyc1", "--ssh-keys", sshkey)
+  build = spawn('doctl', ["compute", "droplet", "create", getRandomName() ,"--size", size, "--image", image, "--region", "nyc1", "--ssh-keys", sshkey)
   build.stdout.on('data', function(data) {
     console.log(data);
     callback(data)
