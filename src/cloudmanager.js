@@ -72,8 +72,8 @@ module.exports = function(robot) {
         for (var i = 0; i < apps.length; i++) {
               msg.send(post);
 
-          })
-        }
+          }
+        });
 
       });
 }
