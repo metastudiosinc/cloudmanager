@@ -17,13 +17,7 @@ var spawn = require('child_process').spawn
 
 
 module.exports = function(robot) {
-    robot.hear(/(.*)cloud status(.*)/i, function(res){
-        var build = spawn('heroku', ["apps"])
-        build.stdout.on('data', function("data") {
-          if(data){
-            res.send("--" +data.toString());
-          }
-
-        })
+    robot.hear(/cloud status/i, function(msg){
+        msg.reply("partly cloudy, chance of rain");
     });
 }
