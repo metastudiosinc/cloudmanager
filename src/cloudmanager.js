@@ -41,7 +41,7 @@ var getHerokuApps = function(callback) {
 var getAppStatus = function(appname, callback){
   var build = spawn('heroku', ["ps", "-a", appname]);
   build.stdout.on('data', function(data){
-      callback(data);
+      callback(appname, data);
   })
 
 }
@@ -51,9 +51,9 @@ module.exports = function(robot) {
       getHerokuApps(function(apps) {
         for (var i = 0; i < apps.length; i++) {
 
-          getAppStatus(apps[i], function(data) {
+          getAppStatus(apps[i], function(appName, data) {
             var post = data.toString()
-            if (post.indexOf(apps[i]) > -1 || post.indexOf("web") > -1){
+            if (post.indexOf(appName) > -1 || post.indexOf("web") > -1){
               msg.send(post);
             }
 
