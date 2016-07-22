@@ -20,7 +20,7 @@ module.exports = function(robot) {
     robot.hear(/cloud status/i, function(msg){
       var build = spawn('heroku', ["apps"]);
       build.stdout.on('data', function(data){
-        msg.send("--" + data.toString());
+        msg.send(data.toString().split("\n"));
       });
     });
 }
