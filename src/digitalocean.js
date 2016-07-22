@@ -21,8 +21,10 @@ var sshkey = "";
 //TODO ID Should be passed in somewhere
 build = spawn('doctl', ["compute", "ssh-key", "get", "1846811"])
 build.stdout.on('data', function(data) {
-  console.log(data.toString());
-  sshkey = data[0]["fingerprint"].toString();
+  vr info = JSON.parse(data[0].toString())
+  console.log(info);
+  sshkey = info.fingerprint;
+  console.log(sshkey);
 });
 build.stderr.on('data', function(data) {
   console.log(data);
