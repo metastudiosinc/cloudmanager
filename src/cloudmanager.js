@@ -17,14 +17,19 @@ var spawn = require('child_process').spawn
 
 
 module.exports = function(robot) {
-    robot.hear(/cloud status/i, function(msg){
+    robot.hear(/heroku status/i, function(msg){
       var build = spawn('heroku', ["apps"]);
       build.stdout.on('data', function(data){
         data = data.toString();
         data = data.split("\n");
         for (chunk of data) {
-          msg.send(chunk);
-          msg.send("==")
+          if(chunk.indexOf("===") < 0){
+            build2 = spawn('heroku', ["ps", "--app", chunk])
+            build2.stdout.on('data', function (data2) {
+              msg.send(data2);
+
+            });
+          }
         }
 
       });
