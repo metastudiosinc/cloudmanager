@@ -20,15 +20,18 @@ var getHerokuApps = function() {
   var apps = [];
   var build = spawn('heroku', ["apps"]);
   build.stdout.on('data', function(data){
-    data = data.toString();
-    data = data.split("\n");
-    for (chunk of data) {
-      if(chunk.indexOf("===") < 0 && chunk.length > 0){
-        apps.push(chunk)
+    if (data){
+      data = data.toString();
+      data = data.split("\n");
+      for (chunk of data) {
+        if(chunk.indexOf("===") < 0 && chunk.length > 0){
+          apps.push(chunk)
 
+        }
       }
+      return apps;
     }
-    return apps;
+
 
   });
 
