@@ -38,7 +38,7 @@ var getHerokuApps = function(callback) {
 
 }
 
-var getAppStatus = function(appname, callback){
+var getHerokuAppStatus = function(appname, callback){
   var build = spawn('heroku', ["ps", "-a", appname]);
   build.stdout.on('data', function(data){
       callback(appname, data);
@@ -46,12 +46,14 @@ var getAppStatus = function(appname, callback){
 
 }
 
+
+
 module.exports = function(robot) {
-    robot.hear(/heroku apps/i, function(msg){
+    robot.hear(/heroku status/i, function(msg){
       getHerokuApps(function(apps) {
         for (var i = 0; i < apps.length; i++) {
 
-          getAppStatus(apps[i], function(appName, data) {
+          getHerokuAppStatus(apps[i], function(appName, data) {
             var post = data.toString()
             if (post.indexOf(appName) > -1 || post.indexOf("web") > -1){
               msg.send(post);
@@ -64,4 +66,14 @@ module.exports = function(robot) {
       });
 
     });
+
+    robot.hear(/heroku apps/i, function(msg){
+      getHerokuApps(function(apps) {
+        for (var i = 0; i < apps.length; i++) {
+              msg.send(post);
+
+          })
+        }
+
+      });
 }
