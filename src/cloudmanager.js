@@ -38,10 +38,25 @@ var getHerokuApps = function(callback) {
 
 }
 
+var getAppStatus = function(appname, callback){
+  var build = spawn('heroku', ["ps", "-a", appname]);
+  build.stdout.on('data', function(data){
+      callback(data);
+  })
+
+}
+
 module.exports = function(robot) {
     robot.hear(/heroku apps/i, function(msg){
       getHerokuApps(function(apps) {
-        msg.send(apps.toString());
+        for (var i = 0; i < apps.length; i++) {
+
+          getAppStatus(apps[i], function(data) {
+            msg.send(data.toString());
+
+          })
+        }
+
       });
 
     });
