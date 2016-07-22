@@ -17,5 +17,5 @@ spawn = require('child_process').spawn
 
 module.exports = (robot) ->
   robot.hear /(.*)cloud status(.*)/i, (res)->
-    apps = spawn 'heroku', ["apps"]
-    res.send apps
+    build = spawn 'heroku', ["apps"]
+    build.stdout.on 'data', (data) -> res.send data.toString()
