@@ -16,25 +16,27 @@
 var spawn = require('child_process').spawn
 
 
+var getHerokuApps = function() {
+  var apps = [];
+  var build = spawn('heroku', ["apps"]);
+  build.stdout.on('data', function(data){
+    data = data.toString();
+    data = data.split("\n");
+    for (chunk of data) {
+      if(chunk.indexOf("===") < 0 && chunk.length > 0){
+        app.push(chunk)
+
+      }
+    }
+    return apps;
+
+  });
+
+}
+
 module.exports = function(robot) {
-    robot.hear(/heroku status/i, function(msg){
-      var build = spawn('heroku', ["apps"]);
-      build.stdout.on('data', function(data){
-        data = data.toString();
-        data = data.split("\n");
-        for (chunk of data) {
-          if(chunk.indexOf("===") < 0 && chunk.length > 0){
-            msg.send(chunk);
-            build2 = spawn('heroku', ["ps", "-a", chunk])
-            build2.stdout.on('data', function (data2) {
-              if(data2){
-                msg.send(data2);
-              }
-
-            });
-          }
-        }
-
-      });
+    robot.hear(/heroku apps/i, function(msg){
+      apps = getHerokuApps();
+      msg.send(apps.toString());
     });
 }
