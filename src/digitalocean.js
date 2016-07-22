@@ -29,13 +29,13 @@ build.stderr.on('data', function(data) {
 });
 
 
-var getRandomName = function(){
+var getRandomName = function() {
   return ("action-jack");
 }
 
 var get
 
-var createDOServer = function(size, image, callback){
+var createDOServer = function(size, image, callback) {
   var name = getRandomName();
   build = spawn('doctl', ["compute", "droplet", "create", name, "--size", size, "--image", image, "--region", "nyc1", "--ssh-keys", sshkey])
   build.stdout.on('data', function(data) {
@@ -62,10 +62,10 @@ var getDOdroplets = function(callback) {
 }
 
 
-module.exports = function(robot){
+module.exports = function(robot) {
   robot.hear(/(.*)DO small server(.*)/i, function(msg) {
     msg.send("I will see what is lying around.")
-    createDOServer(function(data) {
+    createDOServer("1gb", "centos-7-0-x64", function(data) {
       msg.send(data.toString())
     });
 
