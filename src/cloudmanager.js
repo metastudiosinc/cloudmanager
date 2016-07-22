@@ -17,9 +17,10 @@ var spawn = require('child_process').spawn
 
 
 var getHerokuApps = function(callback) {
-  var apps = [];
+
   var build = spawn('heroku', ["apps"]);
   build.stdout.on('data', function(data){
+    var apps = [];
     if (data){
       data = data.toString();
       data = data.split("\n");
