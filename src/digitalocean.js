@@ -37,7 +37,9 @@ var get
 
 var createDOServer = function(size, image, callback) {
   var name = getRandomName();
-  build = spawn('doctl', ["compute", "droplet", "create", name, "--size", size, "--image", image, "--region", "nyc1", "--ssh-keys", sshkey])
+  var command = ["compute", "droplet", "create", name, "--size", size, "--image", image, "--region", "nyc1", "--ssh-keys", sshkey];
+  console.log("doctl " + command.join(" "));
+  build = spawn('doctl', command)
   build.stdout.on('data', function(data) {
     console.log(data);
     callback(data)
