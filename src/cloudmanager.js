@@ -27,7 +27,10 @@ module.exports = function(robot) {
             msg.send(chunk);
             build2 = spawn('heroku', ["ps", "-a", chunk])
             build2.stdout.on('data', function (data2) {
-              msg.send(data2);
+              if(data2){
+                msg.send(data2);
+              }
+
             });
           }
         }
