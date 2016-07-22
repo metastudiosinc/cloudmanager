@@ -30,8 +30,14 @@ var createDOServer = function(callback){
 
 var getDOdroplets = function(callback) {
   build = spawn('doctl', ["compute", "droplet", "list"])
-  build.stdout.on('data', callback(data))
-  build.stderr.on('data', callback(data))
+  build.stdout.on('data', function(data) {
+    console.log(data);
+    callback(data))
+  }
+  build.stderr.on('data', function(data) {
+    console.log(data);
+    callback(data))
+  }
 }
 
 
