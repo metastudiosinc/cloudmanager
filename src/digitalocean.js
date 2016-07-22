@@ -32,12 +32,12 @@ var getDOdroplets = function(callback) {
   build = spawn('doctl', ["compute", "droplet", "list"])
   build.stdout.on('data', function(data) {
     console.log(data);
-    callback(data))
-  }
+    callback(data)
+  });
   build.stderr.on('data', function(data) {
     console.log(data);
-    callback(data))
-  }
+    callback(data)
+  });
 }
 
 
