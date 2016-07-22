@@ -70,7 +70,7 @@ module.exports = function(robot) {
     robot.hear(/heroku apps/i, function(msg){
       getHerokuApps(function(apps) {
         for (var i = 0; i < apps.length; i++) {
-              msg.send(post);
+              msg.send(apps[i]);
 
           }
         });
