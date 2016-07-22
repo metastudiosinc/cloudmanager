@@ -24,7 +24,7 @@ var getHerokuApps = function() {
     data = data.split("\n");
     for (chunk of data) {
       if(chunk.indexOf("===") < 0 && chunk.length > 0){
-        app.push(chunk)
+        apps.push(chunk)
 
       }
     }
