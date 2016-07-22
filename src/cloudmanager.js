@@ -16,7 +16,7 @@
 var spawn = require('child_process').spawn
 
 
-var getHerokuApps = function() {
+var getHerokuApps = function(callback) {
   var apps = [];
   var build = spawn('heroku', ["apps"]);
   build.stdout.on('data', function(data){
@@ -29,7 +29,7 @@ var getHerokuApps = function() {
 
         }
       }
-      return apps;
+      callback(apps);
     }
 
 
@@ -39,7 +39,9 @@ var getHerokuApps = function() {
 
 module.exports = function(robot) {
     robot.hear(/heroku apps/i, function(msg){
-      apps = getHerokuApps();
-      msg.send(apps.toString());
+      getHerokuApps(function(apps) {
+        msg.send(apps.toString());
+      });
+
     });
 }
