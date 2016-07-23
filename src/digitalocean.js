@@ -80,7 +80,7 @@ module.exports = function(robot) {
       if(data.toString() != "null"){
         msg.send(data.toString())
       }else{
-        msg.send("no active hosts")
+        msg.send("no active DigitalOcean hosts")
       }
 
     });
