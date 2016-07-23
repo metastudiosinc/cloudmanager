@@ -35,7 +35,7 @@ var getRandomName = function() {
   return ("action-jack");
 }
 
-var get
+
 
 var createDOServer = function(size, image, callback) {
   var name = getRandomName();
@@ -56,11 +56,11 @@ var createDOServer = function(size, image, callback) {
 var getDOdroplets = function(callback) {
   build = spawn('doctl', ["compute", "droplet", "list"])
   build.stdout.on('data', function(data) {
-    console.log(data);
+    console.log(data.toString());
     callback(data)
   });
   build.stderr.on('data', function(data) {
-    console.log(data);
+    console.log(data.toString());
     callback(data)
   });
 }
@@ -77,7 +77,12 @@ module.exports = function(robot) {
 
   robot.hear(/(.*)DO status(.*)/i, function(msg) {
     getDOdroplets(function(data) {
-      msg.send(data.toString())
+      if(data.toString() != "null"){
+        msg.send(data.toString())
+      }else{
+        msg.send("no active DigitalOcean hosts")
+      }
+
     });
 
   })
