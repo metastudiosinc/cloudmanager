@@ -77,7 +77,12 @@ module.exports = function(robot) {
 
   robot.hear(/(.*)DO status(.*)/i, function(msg) {
     getDOdroplets(function(data) {
-      msg.send(data.toString())
+      if(data.toString() != null){
+        msg.send(data.toString())
+      }else{
+        msg.send("no active hosts")
+      }
+
     });
 
   })
