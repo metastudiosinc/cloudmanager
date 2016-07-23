@@ -20,7 +20,12 @@ function getAWSstatus(callback) {
   build = spawn('aws', ["ec2", "describe-hosts"])
   build.stdout.on('data', function(data) {
     var info = JSON.parse(data.toString())
-    callback(info.Hosts)
+    if (info.Hosts){
+      callback(info.Hosts)
+    }else{
+      callback("No active hosts")
+    }
+
   });
   build.stderr.on('data', function(data) {
     callback(data);
