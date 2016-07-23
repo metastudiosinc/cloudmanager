@@ -35,7 +35,7 @@ var getRandomName = function() {
   return ("action-jack");
 }
 
-var get
+
 
 var createDOServer = function(size, image, callback) {
   var name = getRandomName();
