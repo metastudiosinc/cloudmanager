@@ -15,9 +15,9 @@
 
 spawn = require('child_process').spawn
 
-function getAWSstatus() {
+function getAWSstatus(callback) {
   console.log( "no connection to AWS yet");
-  return({"messaage":"no service available"})
+  callback({"messaage":"no service available"})
 
 }
 
