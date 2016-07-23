@@ -20,13 +20,7 @@ function getAWSstatus(callback) {
   build = spawn('aws', ["ec2", "describe-hosts"])
   build.stdout.on('data', function(data) {
     var info = JSON.parse(data.toString())
-    if (info.Hosts){
       callback(info.Hosts)
-    }else{
-      console.log("no data");
-      callback("No active hosts")
-    }
-
   });
   build.stderr.on('data', function(data) {
     console.log(data.toString());
@@ -41,7 +35,12 @@ module.exports = function(robot) {
   robot.hear(/(.*)AWS status(.*)/i, function(msg) {
     getAWSstatus(function(data) {
       console.log("aws call complete");
-      msg.send(data.toString())
+      if(data.toString() != ""){
+        msg.send(data.toString())
+      }else{
+        msg.send("no active hosts")
+      }
+
     });
 
   })
