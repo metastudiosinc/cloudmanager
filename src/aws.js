@@ -16,8 +16,15 @@
 spawn = require('child_process').spawn
 
 function getAWSstatus(callback) {
-  console.log( "no connection to AWS yet");
-  callback({"messaage":"no service available"})
+  //aws ec2 describe-hosts
+  build = spawn('aws', ["ec2", "describe-hosts"])
+  build.stdout.on('data', function(data) {
+    var info = JSON.parse(data.toString())
+    callback(info.Hosts)
+  });
+  build.stderr.on('data', function(data) {
+    callback(data);
+  });
 
 }
 
