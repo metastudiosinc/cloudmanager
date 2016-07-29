@@ -18,7 +18,7 @@ var spawn = require('child_process').spawn
 
 module.exports = function(robot) {
 
-  robot.hear(/cloud status/i, function(msg) {
+  robot.respond(/cloud status/i, function(msg) {
     msg.send("I hit my head and forgot how to do that")
 
   });

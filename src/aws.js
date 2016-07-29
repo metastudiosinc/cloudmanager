@@ -32,7 +32,7 @@ function getAWSstatus(callback) {
 
 module.exports = function(robot) {
 
-  robot.hear(/(.*)AWS status(.*)/i, function(msg) {
+  robot.respond(/(.*)AWS status(.*)/i, function(msg) {
     getAWSstatus(function(data) {
       console.log("aws call complete");
       if(data.toString() != ""){

@@ -67,7 +67,7 @@ var getDOdroplets = function(callback) {
 
 
 module.exports = function(robot) {
-  robot.hear(/(.*)DO small server(.*)/i, function(msg) {
+  robot.respond(/(.*)DO small server(.*)/i, function(msg) {
     msg.send("I will see what is lying around.")
     createDOServer("1gb", "centos-7-0-x64", function(data) {
       msg.send(data.toString())
@@ -75,7 +75,7 @@ module.exports = function(robot) {
 
   })
 
-  robot.hear(/(.*)DO status(.*)/i, function(msg) {
+  robot.respond(/(.*)DO status(.*)/i, function(msg) {
     getDOdroplets(function(data) {
       if(data.toString() != "null"){
         msg.send(data.toString())

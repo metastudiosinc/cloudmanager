@@ -67,7 +67,7 @@ var getHerokuAppStatus = function(appname, callback) {
 
 
 module.exports = function(robot) {
-  robot.hear(/heroku status/i, function(msg) {
+  robot.respond(/heroku status/i, function(msg) {
     getHerokuApps(function(error, data) {
       if(error){
          msg.send("error");
@@ -96,7 +96,7 @@ module.exports = function(robot) {
 
   });
 
-  robot.hear(/heroku apps/i, function(msg) {
+  robot.respond(/heroku apps/i, function(msg) {
     getHerokuApps(function(error, data) {
       if(error){
         msg.send(data)
